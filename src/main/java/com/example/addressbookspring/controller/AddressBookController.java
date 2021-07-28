@@ -1,6 +1,10 @@
 package com.example.addressbookspring.controller;
 
 import com.example.addressbookspring.dto.PersonDTO;
+import com.example.addressbookspring.dto.ResponseDTO;
+import com.example.addressbookspring.model.PersonData;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -8,27 +12,36 @@ import org.springframework.web.bind.annotation.*;
 public class AddressBookController {
 
     @GetMapping(value = {"","/","home"})
-    public String getEmployeePayroll(){
-        return "Got Person Data successfully ";
+    public ResponseEntity<ResponseDTO> getEmployeePayroll(){
+        PersonData personData = new PersonData(1,new PersonDTO("Shatakashi","Noida"));
+        ResponseDTO responseDTO = new ResponseDTO("Get call successful",personData);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public String getEmployeePayrollById(@PathVariable int id){
-        return "Got Person Data with Id: "+id +" successfully";
+    public ResponseEntity<ResponseDTO> getEmployeePayrollById(@PathVariable int id){
+        PersonData personData = new PersonData(1,new PersonDTO("Shatakashi","Noida"));
+        ResponseDTO responseDTO = new ResponseDTO("Get call successful",personData);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public String addEmployeePayroll(@RequestBody PersonDTO personDTO){
-        return "Person Created Successfully "+personDTO;
+    public ResponseEntity<ResponseDTO> addEmployeePayroll(@RequestBody PersonDTO personDTO){
+        PersonData personData = new PersonData(1,personDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Created Person Successfully",personData);
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public String updateEmployeePayroll(@RequestBody  PersonDTO personDTO){
-        return "Person Updated Successfully "+personDTO;
+    public ResponseEntity<ResponseDTO> updateEmployeePayroll(@RequestBody  PersonDTO personDTO){
+        PersonData personData = new PersonData(1,personDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Updated Person Data Successfully",personData);
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteEmployeePayrollById(@PathVariable int id){
-        return "Person with id "+id+" deleted successfully";
+    public ResponseEntity<ResponseDTO> deleteEmployeePayrollById(@PathVariable int id){
+        ResponseDTO responseDTO = new ResponseDTO("Delete Call Successful ",+id);
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 }
