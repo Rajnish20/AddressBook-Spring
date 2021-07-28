@@ -1,6 +1,7 @@
 package com.example.addressbookspring.service;
 
 import com.example.addressbookspring.dto.PersonDTO;
+import com.example.addressbookspring.exception.AddressBookException;
 import com.example.addressbookspring.model.PersonData;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,10 @@ public class AddressBookService implements IAddressBookService{
 
     @Override
     public PersonData getPersonById(int personId) {
-        return this.personDataList.get(personId - 1);
+        return this.personDataList.stream()
+                .filter(personData -> personData.getPersonId() == personId)
+                .findFirst()
+                .orElseThrow(() -> new AddressBookException("Person Not Found"));
     }
 
     @Override
