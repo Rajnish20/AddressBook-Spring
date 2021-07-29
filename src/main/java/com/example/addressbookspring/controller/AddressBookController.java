@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * Represent AddressBook REST API Controller
  * @author Rajnish Sahu
  */
+@EnableSwagger2
 @RestController
 @RequestMapping("/addressbook")
 public class AddressBookController {
