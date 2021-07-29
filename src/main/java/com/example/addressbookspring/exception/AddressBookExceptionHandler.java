@@ -28,6 +28,5 @@ public class AddressBookExceptionHandler {
     public ResponseEntity<ResponseDTO> handlePersonNotFound(AddressBookException exception){
         return new ResponseEntity<>(new ResponseDTO("Exception while processing REST Request",exception.getMessage()),HttpStatus.BAD_REQUEST);
     }
-
 }
 
